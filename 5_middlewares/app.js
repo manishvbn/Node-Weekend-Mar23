@@ -1,5 +1,7 @@
 const http = require('http');
 const express = require('express');
+const logger = require('morgan');
+const favicon = require('serve-favicon');
 
 let employees = [{ id: 1, name: "Manish" },
 { id: 2, name: "Abhijeet" },
@@ -11,13 +13,44 @@ const app = express();
 
 app.set("view engine", "pug");
 
-// Routes
+// app.use((req, res, next) => {
+//     console.log("Request - Middleware One");
+//     next();
+//     console.log("Response - Middleware One");
+// });
+
+// app.use((req, res, next) => {
+//     console.log("Request - Middleware Two");
+//     next();
+//     console.log("Response - Middleware Two");
+// });
+
+// app.use((req, res, next) => {
+//     var stTime = new Date().getTime();
+//     next();
+//     var enTime = new Date().getTime();
+//     var tTime = enTime - stTime;
+//     console.log(`${req.url} - Total Time ${tTime} ms`);
+// });
+
+app.use(logger('dev'));
+app.use(favicon(__dirname + "/public/images/favicon.png"));
+
 app.get("/", (req, res) => {
+    // throw new Error("Just for Check");
+    console.log("Get Request Handler - Index");
     res.render("index", { pageTitle: "Index View" });
 });
 
 app.get("/employees", (req, res) => {
+    console.log("Get Request Handler - Employees");
     res.render("employees", { pageTitle: "Employees View", empList: employees });
+});
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.log("Error Handler");
+    res.status(500).send("Server Error");
 });
 
 // ----------------------------------------------- Hosting Code
