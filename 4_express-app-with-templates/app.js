@@ -16,6 +16,10 @@ app.set("view engine", "pug");
 app.get("/", (req, res) => {
     res.render("index", { pageTitle: "Index View" });
 });
+
+app.get("/employees", (req, res) => {
+    res.render("employees", { pageTitle: "Employees View", empList: employees });
+});
 // ----------------------------------------------- Hosting Code
 
 var server = http.createServer(app);
