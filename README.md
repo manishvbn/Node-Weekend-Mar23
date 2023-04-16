@@ -1,2 +1,2 @@
-# Node-we-mar23
-Node JS Training Synechron
+# Node-Weekend-Mar23
+Node JS Weekend Training Synechron
