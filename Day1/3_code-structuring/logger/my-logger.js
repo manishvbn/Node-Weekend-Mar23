@@ -1,0 +1,1 @@
+console.log("Logged from logger folder my-logger.js File");
